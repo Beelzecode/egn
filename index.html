@@ -1,14 +1,12 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-
- <link rel="manifest" href="manifest.json">
- <meta name="theme-color" content="#2196f3">
-
- <link rel="icon"  href="https://i.postimg.cc/x1L9g9J9/eng.jpg" type="image/png">
- <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href__="manifest.json">
+    <meta name="theme-color" content="#2196f3">
+    <link rel="icon" href__="https://i.postimg.cc/x1L9g9J9/eng.jpg" type="image/png">
 
 
+ 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illuminati EGN Portal</title>
@@ -227,8 +225,7 @@
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             border: 1px solid #374151;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -243,7 +240,7 @@
             display: inline-block;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
         
@@ -262,8 +259,8 @@
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
             margin-bottom: 1.5rem;
         }
         
@@ -271,7 +268,7 @@
             background: rgba(31, 41, 55, 0.8);
             border: 1px solid rgba(55, 65, 81, 0.8);
             border-radius: 12px;
-            padding: 1.25rem;
+            padding: 1rem;
             backdrop-filter: blur(10px);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -308,7 +305,7 @@
         
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1rem;
         }
         
@@ -485,6 +482,59 @@
             border: 2px solid #fbbf24 !important;
         }
         
+        .member-info-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #9ca3af;
+            padding: 2px 0;
+        }
+        
+        .member-info-row i {
+            width: 14px;
+            color: #6b7280;
+        }
+        
+        .member-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 40px;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #374151;
+        }
+        
+        .member-actions button {
+            padding: 8px;
+            font-size: 11px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .member-actions .btn-paid {
+            background: #059669;
+            color: white;
+        }
+        
+        .member-actions .btn-partial {
+            background: #d97706;
+            color: white;
+        }
+        
+        .member-actions .btn-delete {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .member-actions button:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        
         @media (max-width: 640px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -643,43 +693,43 @@
                         <div class="stats-card" onclick="filterMembers('all')" id="stat-all">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-gray-300 text-sm">Total Members</p>
+                                    <p class="text-gray-300 text-xs">Total Members</p>
                                     <h3 class="text-2xl font-bold text-white mt-1" id="total-members">0</h3>
                                 </div>
-                                <i class="fas fa-users text-yellow-400 text-xl"></i>
+                                <i class="fas fa-users text-yellow-400 text-lg"></i>
                             </div>
                         </div>
                         <div class="stats-card" onclick="filterMembers('paid')" id="stat-paid">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-gray-300 text-sm">Paid Members</p>
+                                    <p class="text-gray-300 text-xs">Paid Members</p>
                                     <h3 class="text-2xl font-bold text-green-400 mt-1" id="paid-members">0</h3>
                                 </div>
-                                <i class="fas fa-crown text-green-400 text-xl"></i>
+                                <i class="fas fa-crown text-green-400 text-lg"></i>
                             </div>
                         </div>
                         <div class="stats-card" onclick="filterMembers('partial')" id="stat-partial">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-gray-300 text-sm">Partial Payment</p>
+                                    <p class="text-gray-300 text-xs">Partial Payment</p>
                                     <h3 class="text-2xl font-bold text-yellow-400 mt-1" id="partial-members">0</h3>
                                 </div>
-                                <i class="fas fa-clock text-yellow-400 text-xl"></i>
+                                <i class="fas fa-clock text-yellow-400 text-lg"></i>
                             </div>
                         </div>
                         <div class="stats-card" onclick="filterMembers('pending')" id="stat-pending">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-gray-300 text-sm">Pending</p>
+                                    <p class="text-gray-300 text-xs">Pending</p>
                                     <h3 class="text-2xl font-bold text-orange-400 mt-1" id="pending-members">0</h3>
                                 </div>
-                                <i class="fas fa-calendar text-orange-400 text-xl"></i>
+                                <i class="fas fa-calendar text-orange-400 text-lg"></i>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Members List -->
-                    <div class="bg-gray-800 rounded-lg p-4 md:p-6 illuminati-shadow">
+                    <div class="bg-gray-800 rounded-lg p-4 illuminati-shadow">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
                             <div class="flex items-center gap-2">
                                 <h2 class="text-lg font-bold text-white">Registered Members</h2>
@@ -819,7 +869,7 @@
                             PAYMENT RECEIPT
                         </h1>
                         <p class="text-gray-300">Select a member to generate receipt</p>
-                        <div class="flex gap-4 justify-center mt-4">
+                        <div class="flex gap-4 justify-center mt-4 flex-wrap">
                             <select id="receipt-member-select" onchange="generateReceiptContent()" class="px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600">
                                 <option value="">Select Member</option>
                             </select>
@@ -844,7 +894,7 @@
                             ID CARD GENERATOR
                         </h1>
                         <p class="text-gray-300">Select a member to generate ID card</p>
-                        <div class="flex gap-4 justify-center mt-4">
+                        <div class="flex gap-4 justify-center mt-4 flex-wrap">
                             <select id="idcard-member-select" onchange="updateIdCard()" class="px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600">
                                 <option value="">Select Member</option>
                             </select>
@@ -1022,6 +1072,10 @@
                     <input type="number" name="amountPaid" id="form-amountPaid" value="0">
                 </div>
                 <div class="form-group">
+                    <label>Payment Due Date</label>
+                    <input type="date" name="paymentDueDate" id="form-paymentDueDate">
+                </div>
+                <div class="form-group">
                     <label>Payment Status</label>
                     <select name="paymentStatus" id="form-paymentStatus">
                         <option value="pending">Pending</option>
@@ -1076,7 +1130,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // State
         let appState = {
             isLoggedIn: localStorage.getItem('egnLoggedIn') === 'true',
             isAdmin: localStorage.getItem('isAdmin') === 'true',
@@ -1090,7 +1143,6 @@
 
         let revenueChart, membersChart, statusChart;
 
-        // Load passwords from Firestore
         async function loadPasswords() {
             try {
                 const settingsDoc = await getDoc(doc(db, 'settings', 'passwords'));
@@ -1109,7 +1161,6 @@
             }
         }
 
-        // Login handler
         window.handleLogin = async function() {
             await loadPasswords();
             const password = document.getElementById('loginPasswordInput').value;
@@ -1137,12 +1188,10 @@
             document.getElementById('sidebarToggle').style.display = 'none';
         };
 
-        // Enter key for login
         document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') handleLogin();
         });
 
-        // Load members
         async function loadMembersFromFirestore() {
             const membersRef = collection(db, 'members');
             const q = query(membersRef, orderBy('createdAt', 'desc'));
@@ -1159,7 +1208,6 @@
             });
         }
 
-        // Add/Update member
         async function saveMember(memberData, memberId = null) {
             try {
                 if (memberId) {
@@ -1179,14 +1227,12 @@
             }
         }
 
-        // Delete member
         window.deleteMember = async function(memberId) {
             if (confirm('Are you sure you want to delete this member?')) {
                 await deleteDoc(doc(db, 'members', memberId));
             }
         };
 
-        // Display members
         function displayMembers(membersToShow = null) {
             const container = document.getElementById('members-container');
             const members = membersToShow || appState.members;
@@ -1211,24 +1257,11 @@
                 const statusClass = member.paymentStatus === 'paid' ? 'badge-success' : 
                                   member.paymentStatus === 'partial' ? 'badge-warning' : 'badge-danger';
                 
-                const platformIcons = {
-                    facebook: 'fab fa-facebook',
-                    instagram: 'fab fa-instagram',
-                    whatsapp: 'fab fa-whatsapp',
-                    tiktok: 'fab fa-tiktok',
-                    gmail: 'fas fa-envelope',
-                    streamx: 'fas fa-stream',
-                    youtube: 'fab fa-youtube',
-                    twitter: 'fab fa-twitter',
-                    telegram: 'fab fa-telegram',
-                    other: 'fas fa-globe'
-                };
-                
                 card.innerHTML = `
-                    <div class="flex justify-between items-start mb-3">
+                    <div class="flex justify-between items-start mb-2">
                         <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span class="text-black font-bold">${member.fullName?.charAt(0) || 'M'}</span>
+                            <div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-black font-bold text-sm">${member.fullName?.charAt(0) || 'M'}</span>
                             </div>
                             <div>
                                 <h3 class="text-white font-bold text-sm">${member.fullName}</h3>
@@ -1238,21 +1271,26 @@
                         <span class="badge ${statusClass}">${member.paymentStatus}</span>
                     </div>
                     
-                    <div class="space-y-1 text-xs text-gray-300">
-                        <div class="flex justify-between">
-                            <span>Payment:</span>
-                            <span class="font-semibold">R${member.amountPaid || 0} / R${member.paymentAmount || 4000}</span>
+                    <div class="bg-gray-800/50 rounded-lg p-2 mb-2">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-400">Payment:</span>
+                            <span class="font-semibold text-white">R${member.amountPaid || 0} / R${member.paymentAmount || 4000}</span>
                         </div>
-                        ${member.platform ? `<div><i class="${platformIcons[member.platform] || 'fas fa-globe'} mr-2 text-yellow-400"></i>${member.platform}</div>` : ''}
-                        ${member.phone ? `<div><i class="fas fa-phone mr-2"></i>${member.phone}</div>` : ''}
-                        ${member.location ? `<div><i class="fas fa-map-marker-alt mr-2"></i>${member.location}</div>` : ''}
+                    </div>
+                    
+                    <div class="space-y-1">
+                        ${member.email ? `<div class="member-info-row"><i class="fas fa-envelope"></i><span>${member.email}</span></div>` : ''}
+                        ${member.phone ? `<div class="member-info-row"><i class="fas fa-phone"></i><span>${member.phone}</span></div>` : ''}
+                        ${member.paymentDueDate ? `<div class="member-info-row"><i class="fas fa-calendar-alt"></i><span>Due: ${member.paymentDueDate}</span></div>` : ''}
+                        ${member.platform ? `<div class="member-info-row"><i class="fas fa-globe"></i><span>${member.platform}</span></div>` : ''}
+                        ${member.location ? `<div class="member-info-row"><i class="fas fa-map-marker-alt"></i><span>${member.location}</span></div>` : ''}
                     </div>
                     
                     ${appState.isAdmin ? `
-                    <div class="flex gap-2 mt-3 pt-3 border-t border-gray-700">
-                        <button onclick="event.stopPropagation(); quickUpdateStatus('${member.id}', 'paid')" class="flex-1 px-2 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700">Paid</button>
-                        <button onclick="event.stopPropagation(); quickUpdateStatus('${member.id}', 'partial')" class="flex-1 px-2 py-1 bg-yellow-600 text-white text-xs rounded hover:bg-yellow-700">Partial</button>
-                        <button onclick="event.stopPropagation(); deleteMember('${member.id}')" class="px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700"><i class="fas fa-trash"></i></button>
+                    <div class="member-actions">
+                        <button class="btn-paid" onclick="event.stopPropagation(); quickUpdateStatus('${member.id}', 'paid')">Paid</button>
+                        <button class="btn-partial" onclick="event.stopPropagation(); quickUpdateStatus('${member.id}', 'partial')">Partial</button>
+                        <button class="btn-delete" onclick="event.stopPropagation(); deleteMember('${member.id}')"><i class="fas fa-trash"></i></button>
                     </div>
                     ` : ''}
                 `;
@@ -1261,7 +1299,6 @@
             });
         }
 
-        // Quick status update
         window.quickUpdateStatus = async function(memberId, status) {
             const member = appState.members.find(m => m.id === memberId);
             if (member) {
@@ -1273,7 +1310,6 @@
             }
         };
 
-        // Edit member
         function editMember(member) {
             document.getElementById('member-form-title').textContent = 'Edit Member';
             document.getElementById('form-submit-text').textContent = 'Save Changes';
@@ -1286,11 +1322,11 @@
             document.getElementById('form-position').value = member.position || '';
             document.getElementById('form-paymentAmount').value = member.paymentAmount || 4000;
             document.getElementById('form-amountPaid').value = member.amountPaid || 0;
+            document.getElementById('form-paymentDueDate').value = member.paymentDueDate || '';
             document.getElementById('form-paymentStatus').value = member.paymentStatus || 'pending';
             document.getElementById('member-form-modal').classList.add('show');
         }
 
-        // Stats
         function updateStats() {
             const total = appState.members.length;
             const paid = appState.members.filter(m => m.paymentStatus === 'paid').length;
@@ -1300,8 +1336,8 @@
             const totalRevenue = appState.members.reduce((sum, m) => sum + (parseFloat(m.amountPaid) || 0), 0);
             const pendingRevenue = appState.members.reduce((sum, m) => {
                 const required = parseFloat(m.paymentAmount) || 4000;
-                const paid = parseFloat(m.amountPaid) || 0;
-                return sum + (required - paid);
+                const paidAmount = parseFloat(m.amountPaid) || 0;
+                return sum + (required - paidAmount);
             }, 0);
             
             document.getElementById('total-members').textContent = total;
@@ -1312,7 +1348,6 @@
             document.getElementById('pending-revenue').textContent = 'R' + pendingRevenue.toLocaleString();
         }
 
-        // Filter members
         window.filterMembers = function(filter) {
             appState.currentFilter = filter;
             
@@ -1330,7 +1365,6 @@
             displayMembers();
         };
 
-        // Search
         window.searchMembers = function(query) {
             const filtered = appState.members.filter(m => 
                 m.fullName?.toLowerCase().includes(query.toLowerCase()) ||
@@ -1340,7 +1374,6 @@
             displayMembers(filtered);
         };
 
-        // Populate selects
         function populateMemberSelects() {
             const receiptSelect = document.getElementById('receipt-member-select');
             const idcardSelect = document.getElementById('idcard-member-select');
@@ -1351,7 +1384,6 @@
             idcardSelect.innerHTML = '<option value="">Select Member</option>' + options;
         }
 
-        // Charts
         function updateCharts() {
             const monthlyData = {};
             const currentYear = new Date().getFullYear();
@@ -1374,7 +1406,6 @@
             const revenueData = months.map(m => monthlyData[m]?.revenue || 0);
             const memberData = months.map(m => monthlyData[m]?.members || 0);
             
-            // Revenue Chart
             const revenueCtx = document.getElementById('revenueChart');
             if (revenueChart) revenueChart.destroy();
             revenueChart = new Chart(revenueCtx, {
@@ -1400,7 +1431,6 @@
                 }
             });
             
-            // Members Chart
             const membersCtx = document.getElementById('membersChart');
             if (membersChart) membersChart.destroy();
             membersChart = new Chart(membersCtx, {
@@ -1423,7 +1453,6 @@
                 }
             });
             
-            // Status Chart
             const statusCtx = document.getElementById('statusChart');
             if (statusChart) statusChart.destroy();
             statusChart = new Chart(statusCtx, {
@@ -1446,7 +1475,6 @@
             });
         }
 
-        // Navigation
         window.showPage = function(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId + '-page').classList.add('active');
@@ -1468,7 +1496,6 @@
             document.body.className = appState.isDark ? 'dark theme-transition' : 'light theme-transition';
         };
 
-        // Admin
         window.showAdminLogin = function() {
             document.getElementById('admin-login-modal').classList.add('show');
         };
@@ -1557,7 +1584,6 @@
             document.getElementById(modalId).classList.remove('show');
         };
 
-        // Receipt
         window.generateReceiptContent = function() {
             const select = document.getElementById('receipt-member-select');
             const member = appState.members.find(m => m.id === select.value);
@@ -1611,7 +1637,6 @@
             `;
         };
 
-        // ID Card
         window.updateIdCard = function() {
             const select = document.getElementById('idcard-member-select');
             const member = appState.members.find(m => m.id === select.value);
@@ -1620,7 +1645,6 @@
             document.getElementById('id-position').textContent = member?.position || '-';
         };
 
-        // Downloads
         window.downloadThresholdImage = function() {
             html2canvas(document.getElementById('threshold-card')).then(canvas => {
                 const link = document.createElement('a');
@@ -1648,7 +1672,6 @@
             });
         };
 
-        // Form handlers
         document.getElementById('add-member-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(e.target);
@@ -1663,6 +1686,7 @@
                 position: formData.get('position'),
                 paymentAmount: parseFloat(formData.get('paymentAmount')) || 4000,
                 amountPaid: parseFloat(formData.get('amountPaid')) || 0,
+                paymentDueDate: formData.get('paymentDueDate') || '',
                 paymentStatus: formData.get('paymentStatus')
             };
             
@@ -1689,14 +1713,12 @@
             e.target.reset();
         });
 
-        // Click outside modal
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('show');
             }
         });
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', async function() {
             await loadPasswords();
             
