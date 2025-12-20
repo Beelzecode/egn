@@ -1,6 +1,6 @@
 {
-  "name": "EGN Members Payments",
-  "short_name": "EGN",
+  "name": "IBR Members Payments",
+  "short_name": "IBR",
   "description": "Manage the payments and store people in Databases",
   "start_url": "./index.html",
   "display": "standalone",
@@ -8,12 +8,12 @@
   "theme_color": "#F5E427",
   "icons": [
     {
-      "src": "https://i.postimg.cc/x1L9g9J9/eng.jpg",
+      "src": "https://i.postimg.cc/Yqdq10Sp/Screenshot-20251203-115809-Chat-GPT.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://i.postimg.cc/x1L9g9J9/eng.jpg",
+      "src": "https://i.postimg.cc/Yqdq10Sp/Screenshot-20251203-115809-Chat-GPT.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }
