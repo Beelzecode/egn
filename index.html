@@ -468,9 +468,14 @@
         <a class="nav-link" onclick="showPage('payment', this)">
           <i data-lucide="wallet" style="width:16px;height:16px;flex-shrink:0"></i> Payment Installation
         </a>
+        
         <a class="nav-link" onclick="showPage('analytics', this)">
           <i data-lucide="bar-chart-2" style="width:16px;height:16px;flex-shrink:0"></i> Analytics
         </a>
+        <a class="nav-link" onclick="showPage('wallet-admin', this)">
+          <i data-lucide="banknote" style="width:16px;height:16px;flex-shrink:0"></i> Wallet Manager
+        </a>
+        
       </nav>
 
       <div style="margin-top:2rem;padding:1rem;background:#111;border-radius:12px;">
@@ -807,6 +812,57 @@
     </div>
 
   </div>
+
+    <!-- WALLET ADMIN PAGE -->
+    <div id="wallet-admin-page" class="page">
+      <div class="page-header">
+        <i data-lucide="banknote" style="width:28px;height:28px"></i>
+        <div><h1>Wallet Manager</h1><p>Credit balances &amp; view withdrawals</p></div>
+      </div>
+      <div class="content-section">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;">
+          <h3 style="font-weight:700;margin-bottom:1.25rem;font-size:1.1rem;display:flex;align-items:center;gap:8px;">
+            <i data-lucide="plus-circle" style="width:20px;height:20px;"></i> Credit Member Wallet
+          </h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Select Member</label>
+              <select id="wallet-credit-member" style="width:100%;padding:0.7rem;border:2px solid #e5e7eb;border-radius:10px;font-size:0.9rem;">
+                <option value="">Select member...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Current Balance</label>
+              <div style="padding:0.7rem;background:#f9fafb;border:2px solid #e5e7eb;border-radius:10px;font-weight:800;font-size:0.9rem;" id="wallet-current-balance">R0.00</div>
+            </div>
+            <div class="form-group">
+              <label>Amount to Credit (R)</label>
+              <input type="number" id="wallet-credit-amount" placeholder="e.g. 500000" min="1" style="width:100%;padding:0.7rem;border:2px solid #e5e7eb;border-radius:10px;font-size:0.9rem;">
+            </div>
+            <div class="form-group">
+              <label>Reference / Note</label>
+              <input type="text" id="wallet-credit-reference" placeholder="e.g. Commission payout June 2025" style="width:100%;padding:0.7rem;border:2px solid #e5e7eb;border-radius:10px;font-size:0.9rem;">
+            </div>
+          </div>
+          <button onclick="creditMemberWallet()" class="btn-primary" style="width:100%;justify-content:center;padding:0.85rem;margin-top:0.5rem;">
+            <i data-lucide="send" style="width:15px;height:15px"></i> Credit Wallet
+          </button>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:1.5rem;">
+          <h3 style="font-weight:700;margin-bottom:1.25rem;font-size:1.1rem;display:flex;align-items:center;gap:8px;">
+            <i data-lucide="arrow-up-right" style="width:20px;height:20px;"></i> Withdrawal Requests
+          </h3>
+          <div id="admin-withdrawals-list">
+            <div style="text-align:center;padding:2rem;color:#9ca3af;">
+              <i data-lucide="inbox" style="width:28px;height:28px;margin:0 auto 8px;display:block;"></i>
+              Loading withdrawals...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- MODALS -->
@@ -856,8 +912,8 @@
         </select>
       </div>
       <div class="form-group"><label>Position</label><input type="text" name="position" id="form-position" placeholder="e.g., Elite Member"></div>
-      <div class="form-group"><label>Total Payment Required (R)</label><input type="number" name="paymentAmount" id="form-paymentAmount" value="4000"></div>
-      <div class="form-group"><label>Amount Already Paid (R)</label><input type="number" name="amountPaid" id="form-amountPaid" value="0"></div>
+      <div class="form-group"><label>Total Payment Required (R)</label><input type="number" name="paymentAmount" id="form-paymentAmount" value="0" min="0"></div>
+      <div class="form-group"><label>Amount Already Paid (R)</label><input type="number" name="amountPaid" id="form-amountPaid" value="0" min="0"></div>
       <div class="form-group"><label>Current Payment Needed (R)</label><input type="number" name="currentPaymentNeeded" id="form-currentPaymentNeeded" value="0" placeholder="e.g. 500"></div>
       <div class="form-group"><label>Current Payment Due Date</label><input type="date" name="currentPaymentDueDate" id="form-currentPaymentDueDate"></div>
       <div class="form-group"><label>Current Payment Note (what is this payment for?)</label><textarea name="currentPaymentNote" id="form-currentPaymentNote" rows="2" style="width:100%;padding:0.7rem;border:2px solid #e5e7eb;border-radius:10px;font-size:0.9rem;resize:vertical;" placeholder="e.g. Second instalment for joining fee..."></textarea></div>
@@ -1107,6 +1163,7 @@ window.showLoginMode = function(mode) {
       updateStats();
       displayMembers();
       populateMemberSelects();
+      populateWalletMemberSelect();
       updateCharts();
       assignMissingMemberCodes();
     });
@@ -1486,7 +1543,7 @@ window.showPaymentHistory = function(memberId) {
     document.getElementById('form-submit-text').textContent = 'Add Member';
     document.getElementById('add-member-form').reset();
     document.getElementById('edit-member-id').value = '';
-    document.getElementById('form-paymentAmount').value = '4000';
+    document.getElementById('form-paymentAmount').value = '0';
     document.getElementById('form-amountPaid').value = '0';
     document.getElementById('member-form-modal').classList.add('show');
     lucide.createIcons();
@@ -1566,8 +1623,8 @@ window.showPaymentHistory = function(memberId) {
     const memberData = {
       fullName: f.get('fullName'), email: f.get('email'), phone: f.get('phone'),
       location: f.get('location'), platform: f.get('platform'), position: f.get('position'),
-      paymentAmount: parseFloat(f.get('paymentAmount'))||4000,
-      amountPaid: parseFloat(f.get('amountPaid'))||0,
+      paymentAmount: f.get('paymentAmount') !== '' ? parseFloat(f.get('paymentAmount')) : 0,
+      amountPaid: f.get('amountPaid') !== '' ? parseFloat(f.get('amountPaid')) : 0,
       paymentDueDate: f.get('paymentDueDate')||'',
       paymentStatus: f.get('paymentStatus'),
       amountPaidNote: f.get('amountPaidNote') || '',
@@ -1630,6 +1687,104 @@ window.showPaymentHistory = function(memberId) {
     await loadPasswords();
         // Auto-login disabled — always show login screen
   });
+
+  // ===== WALLET ADMIN FUNCTIONS =====
+
+  function populateWalletMemberSelect() {
+    const sel = document.getElementById('wallet-credit-member');
+    if (!sel) return;
+    const opts = appState.members.map(m => `<option value="${m.id}">${m.fullName} (${m.memberCode || 'No code'})</option>`).join('');
+    sel.innerHTML = '<option value="">Select member...</option>' + opts;
+  }
+
+  document.getElementById('wallet-credit-member').addEventListener('change', async function() {
+    const memberId = this.value;
+    const balEl = document.getElementById('wallet-current-balance');
+    if (!memberId) { balEl.textContent = 'R0.00'; return; }
+    const walletSnap = await getDoc(doc(db, 'wallets', memberId));
+    const bal = walletSnap.exists() ? (walletSnap.data().balance || 0) : 0;
+    balEl.textContent = 'R' + Number(bal).toLocaleString('en-ZA', { minimumFractionDigits: 2 });
+  });
+
+  window.creditMemberWallet = async function() {
+    const memberId = document.getElementById('wallet-credit-member').value;
+    const amount = parseFloat(document.getElementById('wallet-credit-amount').value) || 0;
+    const reference = document.getElementById('wallet-credit-reference').value.trim();
+    if (!memberId) { alert('Please select a member'); return; }
+    if (amount <= 0) { alert('Please enter a valid amount'); return; }
+    const member = appState.members.find(m => m.id === memberId);
+    const walletRef = doc(db, 'wallets', memberId);
+    const walletSnap = await getDoc(walletRef);
+    let currentBalance = 0;
+    if (walletSnap.exists()) {
+      currentBalance = walletSnap.data().balance || 0;
+      await updateDoc(walletRef, { balance: currentBalance + amount });
+    } else {
+      await setDoc(walletRef, {
+        memberId: memberId,
+        memberCode: member?.memberCode || '',
+        fullName: member?.fullName || '',
+        balance: amount,
+        createdAt: new Date().toISOString()
+      });
+    }
+    await addDoc(collection(db, 'wallets', memberId, 'transactions'), {
+      type: 'credit',
+      amount: amount,
+      reference: reference || 'Balance credited by admin',
+      createdAt: new Date().toISOString()
+    });
+    document.getElementById('wallet-current-balance').textContent = 'R' + Number(currentBalance + amount).toLocaleString('en-ZA', { minimumFractionDigits: 2 });
+    document.getElementById('wallet-credit-amount').value = '';
+    document.getElementById('wallet-credit-reference').value = '';
+    alert('R' + amount.toLocaleString('en-ZA') + ' credited to ' + (member?.fullName || 'member') + "'s wallet!");
+  };
+
+  function listenToAdminWithdrawals() {
+    const wq = query(collection(db, 'withdrawals'), orderBy('createdAt', 'desc'));
+    onSnapshot(wq, (snapshot) => {
+      const withdrawals = [];
+      snapshot.forEach(d => withdrawals.push({ id: d.id, ...d.data() }));
+      renderAdminWithdrawals(withdrawals);
+    });
+  }
+
+  function renderAdminWithdrawals(withdrawals) {
+    const container = document.getElementById('admin-withdrawals-list');
+    if (!container) return;
+    if (withdrawals.length === 0) {
+      container.innerHTML = '<div style="text-align:center;padding:2rem;color:#9ca3af;"><i data-lucide="inbox" style="width:28px;height:28px;margin:0 auto 8px;display:block;"></i>No withdrawal requests yet</div>';
+      lucide.createIcons();
+      return;
+    }
+    container.innerHTML = withdrawals.map(w => {
+      const date = w.createdAt ? new Date(w.createdAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+      const statusColor = w.status === 'approved' ? '#059669' : w.status === 'rejected' ? '#dc2626' : '#d97706';
+      const statusBg = w.status === 'approved' ? '#d1fae5' : w.status === 'rejected' ? '#fee2e2' : '#fef3c7';
+      return `
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:1rem;margin-bottom:0.75rem;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;">${w.fullName || 'Unknown'}</p>
+              <p style="font-size:0.7rem;color:#9ca3af;font-weight:600;">${w.memberCode || ''} · ${date}</p>
+            </div>
+            <span style="background:${statusBg};color:${statusColor};padding:3px 10px;border-radius:999px;font-size:0.65rem;font-weight:700;text-transform:uppercase;">${w.status || 'pending'}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.8rem;">
+            <div><span style="color:#9ca3af;">Amount:</span> <strong>R${Number(w.amount||0).toLocaleString('en-ZA')}</strong></div>
+            <div><span style="color:#9ca3af;">Bank Fee (member pays):</span> <strong>R${Number(w.fee||0).toLocaleString('en-ZA')}</strong></div>
+            <div><span style="color:#9ca3af;">Bank:</span> <strong>${w.bankName || '-'}</strong></div>
+            <div><span style="color:#9ca3af;">Account No:</span> <strong>${w.accountNumber || '-'}</strong></div>
+            <div style="grid-column:1/-1;"><span style="color:#9ca3af;">Account Name:</span> <strong>${w.accountName || '-'}</strong></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    lucide.createIcons();
+  }
+
+  listenToAdminWithdrawals();
+
 </script>
 </body>
 </html>
